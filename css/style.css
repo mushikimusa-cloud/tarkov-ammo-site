@@ -1,0 +1,125 @@
+body{
+background:#111;
+color:#ddd;
+font-family:Arial,sans-serif;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+.title{
+font-family:'Bebas Neue',sans-serif;
+color:#c8a96a;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+.weapon-tabs-wrapper,
+.caliber-tabs-wrapper{
+overflow-x:auto;
+white-space:nowrap;
+margin-bottom:10px;
+scrollbar-width:none;
+}
+
+.weapon-tabs-wrapper::-webkit-scrollbar,
+.caliber-tabs-wrapper::-webkit-scrollbar{
+display:none;
+}
+
+#weaponTabs button,
+#caliberTabs button{
+background:#222;
+color:#ddd;
+border:none;
+padding:8px 14px;
+margin-right:6px;
+cursor:pointer;
+}
+
+#weaponTabs button:hover,
+#caliberTabs button:hover{
+background:#444;
+}
+
+button.active{
+background:#c8a96a;
+color:#111;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border-bottom:1px solid #333;
+padding:6px;
+text-align:left;
+}
+
+tbody tr:hover{
+background:#1a1a1a;
+}
+
+img{
+height:32px;
+}
+
+/* Tier box */
+
+.tier-box{
+display:inline-block;
+min-width:32px;
+padding:3px 6px;
+border-radius:4px;
+font-weight:bold;
+text-align:center;
+}
+
+.tier-S{background:#8b0000;color:white;}
+.tier-A{background:#d2691e;color:white;}
+.tier-B{background:#c9a227;color:black;}
+.tier-C{background:#3a6ea5;color:white;}
+.tier-D{background:#444;color:#bbb;}
+
+/* Tarkov風タブ */
+
+.weapon-tabs button,
+.caliber-tabs button{
+
+background:#1e1e1e;
+border:1px solid #333;
+color:#ddd;
+padding:6px 14px;
+margin-right:6px;
+cursor:pointer;
+border-radius:4px;
+font-size:14px;
+
+}
+
+.weapon-tabs button:hover,
+.caliber-tabs button:hover{
+background:#2c2c2c;
+}
+
+/* 選択タブ */
+
+.tab-active{
+background:#c8a65a !important;
+color:black !important;
+border-color:#c8a65a !important;
+}
+
+/* ソート矢印 */
+
+.sort-arrow{
+font-size:12px;
+margin-left:4px;
+color:#c8a65a;
+}

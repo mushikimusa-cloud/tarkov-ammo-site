@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Tarkov Ammo Database</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="title">TARKOV AMMO DATABASE</h1>
+
+<div class="weapon-tabs-wrapper">
+<div id="weaponTabs" class="weapon-tabs"></div>
+</div>
+
+<div class="caliber-tabs-wrapper">
+<div id="caliberTabs" class="caliber-tabs"></div>
+</div>
+
+<div class="controls">
+<div id="sortStatus">SORT: NONE</div>
+</div>
+
+<table id="ammoTable">
+
+<thead>
+
+<tr>
+
+<th onclick="setSort('tier')" data-sort="tier">
+TIER <span class="sort-arrow"></span>
+</th>
+
+<th></th>
+
+<th>AMMO</th>
+
+<th onclick="setSort('dmg')" data-sort="dmg">
+DMG <span class="sort-arrow"></span>
+</th>
+
+<th onclick="setSort('pen')" data-sort="pen">
+PEN <span class="sort-arrow"></span>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ammoBody"></tbody>
+
+</table>
+
+</div>
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

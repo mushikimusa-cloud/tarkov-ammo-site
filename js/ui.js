@@ -1,31 +1,56 @@
-import {getTier} from "./tier.js"
+import { getTier } from "./tier.js"
+
+/* ========================= */
+/* TIER CLASS */
+/* ========================= */
 
 function getTierClass(tier){
-return "tier-"+tier
+  return "tier-" + tier
 }
+
+
+/* ========================= */
+/* SOURCE FORMAT */
+/* ========================= */
+
+function formatSource(ammo){
+
+  return {
+    trader: ammo.trader ?? "-",
+    loot: ammo.loot ? "〇" : "×",
+    craft: ammo.craft ? "〇" : "×",
+    flea: ammo.flea ? "〇" : "×"
+  }
+
+}
+
+
+/* ========================= */
+/* RENDER */
+/* ========================= */
 
 export function renderAmmo(list){
 
-const tbody=document.getElementById("ammoBody")
+  const tbody = document.getElementById("ammoBody")
+  tbody.innerHTML = ""
 
-tbody.innerHTML=""
+  list.forEach(a => {
 
-list.forEach(a=>{
+    const tier = getTier(a.penetrationPower)
+    const source = formatSource(a)
 
-const tier=getTier(a.penetrationPower)
+    const tr = document.createElement("tr")
 
-const tr=document.createElement("tr")
-
-tr.innerHTML=`
+    tr.innerHTML = `
 
 <td>
-<div class="tier-box ${getTierClass(tier)}">
-${tier}
-</div>
+  <div class="tier-box ${getTierClass(tier)}">
+    ${tier}
+  </div>
 </td>
 
 <td>
-<img src="${a.iconLink}" width="32">
+  <img src="${a.iconLink}" width="32">
 </td>
 
 <td>${a.name}</td>
@@ -34,21 +59,32 @@ ${tier}
 
 <td>${a.penetrationPower}</td>
 
+<!-- 取得経路 -->
+<td>${source.trader}</td>
+<td>${source.loot}</td>
+<td>${source.craft}</td>
+<td>${source.flea}</td>
+
 `
 
-tbody.appendChild(tr)
+    tbody.appendChild(tr)
 
-})
+  })
 
 }
 
+
+/* ========================= */
+/* INITIAL MESSAGE */
+/* ========================= */
+
 export function showSelectMessage(){
 
-const tbody=document.getElementById("ammoBody")
+  const tbody = document.getElementById("ammoBody")
 
-tbody.innerHTML=`
+  tbody.innerHTML = `
 <tr>
-<td colspan="5" style="text-align:center;padding:20px;color:#888;">
+<td colspan="9" style="text-align:center;padding:20px;color:#888;">
 Select caliber
 </td>
 </tr>

@@ -1,201 +1,217 @@
-import {fetchAmmo} from "./api.js"
-import {renderAmmo,showSelectMessage} from "./ui.js"
-import {enableDragScroll} from "./dragScroll.js"
-import {getTier} from "./tier.js"
+import { fetchAmmo } from "./api.js"
+import { renderAmmo, showSelectMessage } from "./ui.js"
+import { enableDragScroll } from "./dragScroll.js"
 
-import {weaponCategories} from "./data/weaponCategories.js"
-import {getCaliberName,normalizeCaliber} from "./data/caliberNames.js"
-import {wikiAmmo} from "./data/wikiAmmo.js"
-
-
-let ammoData=[]
-let currentCaliber=null
-
-let sortKey=null
-let sortOrder="desc"
+import { weaponCategories } from "./data/weaponCategories.js"
+import { getCaliberName, normalizeCaliber } from "./data/caliberNames.js"
+import { wikiAmmo } from "./data/wikiAmmo.js"
 
 
+/* ========================= */
+/* STATE */
+/* ========================= */
+
+let ammoData = []
+let currentCaliber = null
+
+let sortKey = "tier"
+let sortOrder = "desc"
+
+
+/* ========================= */
+/* WEAPON TABS */
+/* ========================= */
 
 function createWeaponTabs(){
 
-const container=document.getElementById("weaponTabs")
+  const container = document.getElementById("weaponTabs")
+  container.innerHTML = ""
 
-container.innerHTML=""
+  Object.keys(weaponCategories).forEach(category => {
 
-Object.keys(weaponCategories).forEach(cat=>{
+    const btn = document.createElement("button")
+    btn.textContent = category
 
-const btn=document.createElement("button")
+    btn.onclick = () => {
+      createCaliberTabs(category)
+      showSelectMessage()
+    }
 
-btn.textContent=cat
+    container.appendChild(btn)
 
-btn.onclick=()=>{
-createCaliberTabs(cat)
-showSelectMessage()
-}
-
-container.appendChild(btn)
-
-})
+  })
 
 }
 
 
+/* ========================= */
+/* CALIBER TABS */
+/* ========================= */
 
 function createCaliberTabs(category){
 
-const container=document.getElementById("caliberTabs")
+  const container = document.getElementById("caliberTabs")
+  container.innerHTML = ""
 
-container.innerHTML=""
+  const calibers = weaponCategories[category]
 
-const calibers=weaponCategories[category]
+  calibers.forEach(caliber => {
 
-calibers.forEach(c=>{
+    const btn = document.createElement("button")
+    btn.textContent = getCaliberName(caliber)
 
-const btn=document.createElement("button")
+    btn.onclick = () => {
 
-btn.textContent=getCaliberName(c)
+      // active UI
+      document
+        .querySelectorAll("#caliberTabs button")
+        .forEach(b => b.classList.remove("tab-active"))
 
-btn.onclick=()=>{
+      btn.classList.add("tab-active")
 
-document
-.querySelectorAll("#caliberTabs button")
-.forEach(b=>b.classList.remove("tab-active"))
+      // state更新
+      currentCaliber = caliber
 
-btn.classList.add("tab-active")
+      // ★ 常にTierソートに戻す
+      sortKey = "tier"
+      sortOrder = "desc"
 
-currentCaliber=c
+      updateSortUI()
+      updateTable()
 
-updateTable()
+    }
+
+    container.appendChild(btn)
+
+  })
 
 }
 
-container.appendChild(btn)
 
-})
-
-}
-
-
+/* ========================= */
+/* TABLE UPDATE */
+/* ========================= */
 
 function updateTable(){
 
-let list=ammoData.filter(a=>
+  if(!currentCaliber) return
 
-normalizeCaliber(a.caliber)===normalizeCaliber(currentCaliber)
+  let list = ammoData.filter(a =>
+    normalizeCaliber(a.caliber) === normalizeCaliber(currentCaliber)
+  )
 
-)
+  // ソート処理
+  switch(sortKey){
 
+    case "tier":
+      list.sort((a,b)=>a.penetrationPower - b.penetrationPower)
+      break
 
-if(sortKey==="tier"){
+    case "dmg":
+      list.sort((a,b)=>a.damage - b.damage)
+      break
 
-list.sort((a,b)=>a.penetrationPower-b.penetrationPower)
+    case "pen":
+      list.sort((a,b)=>a.penetrationPower - b.penetrationPower)
+      break
 
-}
+  }
 
-if(sortKey==="dmg"){
+  if(sortOrder === "desc"){
+    list.reverse()
+  }
 
-list.sort((a,b)=>a.damage-b.damage)
-
-}
-
-if(sortKey==="pen"){
-
-list.sort((a,b)=>a.penetrationPower-b.penetrationPower)
-
-}
-
-
-if(sortOrder==="desc"){
-
-list.reverse()
-
-}
-
-renderAmmo(list)
+  renderAmmo(list)
 
 }
 
 
+/* ========================= */
+/* SORT CONTROL */
+/* ========================= */
 
-window.setSort=function(key){
+window.setSort = function(key){
 
-if(sortKey===key){
+  if(sortKey === key){
+    sortOrder = sortOrder === "desc" ? "asc" : "desc"
+  }else{
+    sortKey = key
+    sortOrder = "desc"
+  }
 
-sortOrder = sortOrder==="desc" ? "asc" : "desc"
+  updateSortUI()
 
-}else{
+  const status = document.getElementById("sortStatus")
+  if(status){
+    status.innerText = `SORT: ${key.toUpperCase()} (${sortOrder})`
+  }
 
-sortKey=key
-
-sortOrder="desc"
-
-}
-
-updateSortUI()
-
-const status=document.getElementById("sortStatus")
-
-if(status){
-
-status.innerText=
-"SORT: "+key.toUpperCase()+" ("+sortOrder+")"
-
-}
-
-updateTable()
+  updateTable()
 
 }
 
 
+/* ========================= */
+/* SORT UI */
+/* ========================= */
 
 function updateSortUI(){
 
-const arrows=document.querySelectorAll(".sort-arrow")
+  const headers = document.querySelectorAll("th[data-sort]")
 
-if(!arrows) return
+  headers.forEach(th => {
 
-arrows.forEach(el=>{
+    const arrow = th.querySelector(".sort-arrow")
+    if(!arrow) return
 
-el.textContent=""
+    const key = th.dataset.sort
 
-})
+    if(key === sortKey){
 
-if(!sortKey) return
+      arrow.textContent = sortOrder === "desc" ? "▼" : "▲"
+      arrow.style.opacity = "1"
+      arrow.style.color = "#c8a65a"
 
-const arrow = sortOrder==="desc" ? "▼" : "▲"
+      th.classList.add("active-sort")
 
-const target=document.querySelector(`[data-sort="${sortKey}"] .sort-arrow`)
+    }else{
 
-if(target){
+      arrow.textContent = "▽"
+      arrow.style.opacity = "0.4"
+      arrow.style.color = "#888"
 
-target.textContent=arrow
+      th.classList.remove("active-sort")
+
+    }
+
+  })
 
 }
 
-}
 
-
+/* ========================= */
+/* INIT */
+/* ========================= */
 
 async function init(){
 
-const apiAmmo=await fetchAmmo()
+  const apiAmmo = await fetchAmmo()
 
-ammoData=[
+  ammoData = [
+    ...apiAmmo,
+    ...wikiAmmo
+  ]
 
-...apiAmmo,
-...wikiAmmo
+  createWeaponTabs()
+  showSelectMessage()
+  updateSortUI()
 
-]
+  // スクロール対応
+  const weaponWrapper = document.querySelector(".weapon-tabs-wrapper")
+  const caliberWrapper = document.querySelector(".caliber-tabs-wrapper")
 
-createWeaponTabs()
-
-showSelectMessage()
-
-const weaponWrapper=document.querySelector(".weapon-tabs-wrapper")
-const caliberWrapper=document.querySelector(".caliber-tabs-wrapper")
-
-if(weaponWrapper) enableDragScroll(weaponWrapper)
-if(caliberWrapper) enableDragScroll(caliberWrapper)
+  if(weaponWrapper) enableDragScroll(weaponWrapper)
+  if(caliberWrapper) enableDragScroll(caliberWrapper)
 
 }
 

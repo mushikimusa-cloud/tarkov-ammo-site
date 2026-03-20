@@ -1,125 +1,327 @@
-body{
-background:#111;
-color:#ddd;
-font-family:Arial,sans-serif;
-margin:0;
-padding:20px;
+/* ========================= */
+/* THEME (全体共通設定) */
+/* ========================= */
+
+:root {
+
+  /* 背景 */
+  --bg-main: #111;
+  --bg-sub: #1e1e1e;
+  --bg-hover: #2a2a2a;
+
+  /* テキスト */
+  --text-main: #ddd;
+  --text-sub: #888;
+
+  /* タルコフカラー */
+  --accent: #c8a96a;
+  --accent-strong: #c8a65a;
+
+  /* ボーダー */
+  --border: #333;
+
+  /* フォント */
+  --font-main: Arial, sans-serif;
+  --font-title: 'Bebas Neue', sans-serif;
+
 }
 
-.container{
-max-width:1200px;
-margin:auto;
+
+/* ========================= */
+/* GLOBAL */
+/* ========================= */
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
 }
 
-.title{
-font-family:'Bebas Neue',sans-serif;
-color:#c8a96a;
-letter-spacing:2px;
-margin-bottom:20px;
+.container {
+  max-width: 1200px;
+  margin: 0;
+  padding: 20px;
 }
+
+h1.title {
+  font-family: var(--font-title);
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.header-banner {
+  position: sticky;
+  top: 0;
+  background: var(--bg-main);
+  z-index: 1000;
+  padding: 0 20px 10px 20px;
+  border-bottom: 2px solid var(--accent);
+}
+
+
+/* ========================= */
+/* SITE TAB */
+/* ========================= */
+
+.site-tabs {
+  margin-bottom: 12px;
+}
+
+.site-tab {
+  display: inline-block;
+  background: var(--bg-sub);
+  border: 1px solid var(--accent-strong);
+  color: var(--accent-strong);
+  padding: 10px 22px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: 0.15s;
+}
+
+.site-tab:hover {
+  background: var(--accent-strong);
+  color: #111;
+}
+
+
+/* ========================= */
+/* WEAPON & CALIBER TABS */
+/* ========================= */
 
 .weapon-tabs-wrapper,
-.caliber-tabs-wrapper{
-overflow-x:auto;
-white-space:nowrap;
-margin-bottom:10px;
-scrollbar-width:none;
+.caliber-tabs-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  scrollbar-width: none;
 }
 
 .weapon-tabs-wrapper::-webkit-scrollbar,
-.caliber-tabs-wrapper::-webkit-scrollbar{
-display:none;
+.caliber-tabs-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 #weaponTabs button,
-#caliberTabs button{
-background:#222;
-color:#ddd;
-border:none;
-padding:8px 14px;
-margin-right:6px;
-cursor:pointer;
+#caliberTabs button {
+  background: var(--bg-sub);
+  color: var(--text-main);
+  border: none;
+  padding: 8px 14px;
+  margin-right: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 #weaponTabs button:hover,
-#caliberTabs button:hover{
-background:#444;
+#caliberTabs button:hover {
+  background: var(--bg-hover);
 }
 
-button.active{
-background:#c8a96a;
-color:#111;
+.tab-active {
+  background: var(--accent-strong) !important;
+  color: #111 !important;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
+
+/* ========================= */
+/* TABLE */
+/* ========================= */
+
+.table-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  scrollbar-width: none;
 }
 
-th,td{
-border-bottom:1px solid #333;
-padding:6px;
-text-align:left;
+.table-scroll::-webkit-scrollbar {
+  display: none;
 }
 
-tbody tr:hover{
-background:#1a1a1a;
+table#ammoTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-img{
-height:32px;
+#ammoTable th,
+#ammoTable td {
+  padding: 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Tier box */
-
-.tier-box{
-display:inline-block;
-min-width:32px;
-padding:3px 6px;
-border-radius:4px;
-font-weight:bold;
-text-align:center;
+#ammoTable tbody tr:hover {
+  background: var(--bg-sub);
 }
 
-.tier-S{background:#8b0000;color:white;}
-.tier-A{background:#d2691e;color:white;}
-.tier-B{background:#c9a227;color:black;}
-.tier-C{background:#3a6ea5;color:white;}
-.tier-D{background:#444;color:#bbb;}
+#ammoTable thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-main);
+  z-index: 10;
+}
 
-/* Tarkov風タブ */
 
-.weapon-tabs button,
-.caliber-tabs button{
+/* ========================= */
+/* TIER */
+/* ========================= */
 
-background:#1e1e1e;
-border:1px solid #333;
-color:#ddd;
-padding:6px 14px;
-margin-right:6px;
+.tier-box {
+  display: inline-block;
+  min-width: 32px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tier-S { background: #caa648; color: white; }
+.tier-A { background: #8b0000; color: white; }
+.tier-B { background: #d2691e; color: black; }
+.tier-C { background: #3a6ea5; color: white; }
+.tier-D { background: #444; color: #bbb; }
+
+
+/* ========================= */
+/* QUEST CHART */
+/* ========================= */
+
+.questChart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ノード */
+.questNode {
+  width: 50%;
+  min-width: 200px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: white;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* 1個目だけ余白 */
+.questChart .questNode:first-of-type {
+  margin-top: 12px;
+}
+
+/* アイコン */
+.questNode .traderIcon {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* テキスト */
+.questNode .questText {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskName {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.taskMeta {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* 矢印 */
+.questArrow {
+  font-size: 20px;
+  color: var(--accent-strong);
+  text-align: center;
+  width: 50%;
+}
+
+
+/* ========================= */
+/* QUEST TABS */
+/* ========================= */
+
+.questTabsWrapper {
+  margin: 12px 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.questTabsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.questTabsWrapper .site-tab {
+  margin-right: 6px;
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+.questTabsWrapper .site-tab:hover,
+.questTabsWrapper .site-tab.active {
+  background: var(--accent-strong);
+  color: #111;
+}
+
+
+/* ========================= */
+/* TRADER COLORS */
+/* ========================= */
+
+.trader-prapor { background: #3f7f3f; }
+.trader-therapist { background: #3a6fa5; }
+.trader-skier { background: #7a4fa3; }
+.trader-peacekeeper { background: #b89c5b; }
+.trader-mechanic { background: #4a6b7f; }
+.trader-ragman { background: #7f6a4a; }
+.trader-jaeger { background: #4f6b3f; }
+.trader-fence { background: #666; }
+
+
+/* ========================= */
+/* MISC */
+/* ========================= */
+
+img {
+  height: 32px;
+}
+
+.sort-arrow {
+  font-size: 12px;
+  margin-left: 4px;
+  color: var(--accent-strong);
+
+}
+
+/* ========================= */
+/* ソートをクリックできるとわかるようにする */
+/* ========================= */
+th[data-sort]{
 cursor:pointer;
-border-radius:4px;
-font-size:14px;
-
-}
-
-.weapon-tabs button:hover,
-.caliber-tabs button:hover{
-background:#2c2c2c;
-}
-
-/* 選択タブ */
-
-.tab-active{
-background:#c8a65a !important;
-color:black !important;
-border-color:#c8a65a !important;
-}
-
-/* ソート矢印 */
-
-.sort-arrow{
-font-size:12px;
-margin-left:4px;
-color:#c8a65a;
 }

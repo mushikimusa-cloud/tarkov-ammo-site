@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Quest Chart</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ========================= -->
+<!-- HEADER (固定エリア) -->
+<!-- ========================= -->
+<div class="header-banner">
+  <div class="container">
+    <h1 class="title">Quest Chart</h1>
+
+    <!-- HOMEタブ -->
+    <div class="site-tabs">
+      <a href="index.html" class="site-tab">HOME</a>
+    </div>
+
+    <!-- ========================= -->
+    <!-- TASK CHART TABS（ヘッダ内に配置） -->
+    <!-- ========================= -->
+    <div class="questTabsWrapper">
+      <button id="allTab" class="site-tab">ALL</button>
+      <button id="kappaTab" class="site-tab">KAPPA</button>
+    </div>
+
+    <div class="questNote">
+      ※PMC Lvはトレーダー要求レベルを参考にして推奨レベルとして記載
+    </div>
+  </div>
+</div>
+
+<!-- ========================= -->
+<!-- MAIN SCROLL AREA -->
+<!-- ========================= -->
+<div class="main-scroll">
+  <div class="container">
+    <div id="questChart"></div>
+  </div>
+</div>
+
+<script type="module" src="js/quests.js"></script>
+</body>
+</html>

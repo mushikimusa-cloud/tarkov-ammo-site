@@ -1,79 +1,62 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP2MTNHHCW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SP2MTNHHCW');
-</script>
-
-
 <meta charset="UTF-8">
-<title>Tarkov Ammo Database</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
+<title>Tarkov Tools</title>
 <link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+
+.home{
+text-align:center;
+margin-top:120px;
+}
+
+.home h1{
+font-size:48px;
+color:#c8a96a;
+margin-bottom:40px;
+}
+
+.tool-link{
+
+display:inline-block;
+background:#1e1e1e;
+border:1px solid #333;
+padding:20px 40px;
+font-size:22px;
+color:#ddd;
+text-decoration:none;
+border-radius:6px;
+
+}
+
+.tool-link:hover{
+
+background:#2a2a2a;
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="home">
 
-<h1 class="title">TARKOV AMMO DATABASE</h1>
+<h1>Tarkov Tools</h1>
 
-<div class="weapon-tabs-wrapper">
-<div id="weaponTabs" class="weapon-tabs"></div>
-</div>
+<a class="tool-link" href="TarkovAmmo.html">
+Ammo Database
+</a>
 
-<div class="caliber-tabs-wrapper">
-<div id="caliberTabs" class="caliber-tabs"></div>
-</div>
-
-<div class="controls">
-<div id="sortStatus">SORT: NONE</div>
-</div>
-
-<table id="ammoTable">
-
-<thead>
-
-<tr>
-
-<th onclick="setSort('tier')" data-sort="tier">
-TIER <span class="sort-arrow"></span>
-</th>
-
-<th></th>
-
-<th>AMMO</th>
-
-<th onclick="setSort('dmg')" data-sort="dmg">
-DMG <span class="sort-arrow"></span>
-</th>
-
-<th onclick="setSort('pen')" data-sort="pen">
-PEN <span class="sort-arrow"></span>
-</th>
-
-</tr>
-
-</thead>
-
-<tbody id="ammoBody"></tbody>
-
-</table>
+<a class="tool-link" href="TarkovQuests.html">
+Quest Chart
+</a>
 
 </div>
-
-<script type="module" src="js/main.js"></script>
 
 </body>
 </html>

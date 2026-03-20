@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<title>Tarkov Ammo Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ========================= -->
+<!-- HEADER BANNER -->
+<!-- ========================= -->
+
+<header class="header-banner">
+
+  <h1 class="title">TARKOV AMMO DATABASE</h1>
+
+  <!-- ========================= -->
+  <!-- SITE TAB -->
+  <!-- ========================= -->
+
+  <div class="site-tabs">
+    <a href="index.html" class="site-tab">
+      HOME
+    </a>
+  </div>
+
+  <!-- ========================= -->
+  <!-- WEAPON TABS -->
+  <!-- ========================= -->
+
+  <div class="weapon-tabs-wrapper">
+    <div id="weaponTabs" class="weapon-tabs"></div>
+  </div>
+
+</header>
+
+<!-- ========================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================= -->
+
+<div class="container">
+
+  <!-- ========================= -->
+  <!-- CALIBER TABS -->
+  <!-- ========================= -->
+
+  <div class="caliber-tabs-wrapper">
+    <div id="caliberTabs" class="caliber-tabs"></div>
+  </div>
+
+  <!-- ========================= -->
+  <!-- SORT STATUS -->
+  <!-- ========================= -->
+
+  <div class="controls">
+    <div id="sortStatus">SORT: NONE</div>
+  </div>
+
+  <!-- ========================= -->
+  <!-- AMMO TABLE -->
+  <!-- ========================= -->
+
+<!-- ========================= -->
+<!-- TABLE SCROLL AREA -->
+<!-- ========================= -->
+
+<div class="table-scroll">
+
+  <table id="ammoTable">
+
+<thead>
+  <tr>
+
+    <th onclick="setSort('tier')" data-sort="tier">
+      TIER <span class="sort-arrow">▽</span>
+    </th>
+    <th></th>
+    <th>AMMO</th>
+    <th onclick="setSort('dmg')" data-sort="dmg">
+      DMG <span class="sort-arrow">▽</span>
+    </th>
+    <th onclick="setSort('pen')" data-sort="pen">
+      PEN <span class="sort-arrow">▽</span>
+    </th>
+    <!-- ★追加 -->
+    <th>TRADER</th>
+    <th>LOOT</th>
+    <th>CRAFT</th>
+    <th>FLEA</th>
+  </tr>
+</thead>
+
+    <tbody id="ammoBody"></tbody>
+
+  </table>
+
+</div>
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>
